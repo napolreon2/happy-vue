@@ -15,7 +15,12 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css' }
+    ],
+    script:[
+      { src:'http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js' , type:'text/javascript' },
+      { src:'https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js' , type:'text/javascript' }
     ]
   },
 
@@ -42,12 +47,23 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // 추가하면 CORS 해결가능???
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    
+  },
+  
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  publicRuntimeConfig:{
+    axios:{
+      baseURL: 'http://localhost:8080'
+    }
   }
 }
