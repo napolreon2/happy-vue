@@ -74,7 +74,7 @@
             </b-container>
             <!-- 버튼 영역 -->
             <b-container class="btn-area">
-                <b-button variant="danger" @click="btnCancel">취소</b-button>
+                <b-button variant="danger" @click="btnCancel" to="/">취소</b-button>
                 <b-button variant="primary" @click="btnMobile">모바일 미리보기</b-button>
                 <b-button variant="success" @click="btnSubmit">등록</b-button>
             </b-container>
@@ -106,7 +106,7 @@ export default{
             // 제목 입력
             title: '',
 
-            // 게시기간 개월수 selection
+            // 게시기간 개월수 radio
             selDuration: '1y',
             dutaionOpt: [
                 {value: '1y', text: '1년'},
@@ -126,6 +126,7 @@ export default{
         },
         btnCancel: function(){
             console.log('취소버튼');
+
         },
         btnMobile: function(){
             console.log('모바일버튼');
