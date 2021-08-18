@@ -8,7 +8,7 @@
 
 <script>
 import axios from 'axios';
-import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';
+import {mapState} from 'vuex';
 
 export default{
   layout: 'defaultLayout',

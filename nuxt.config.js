@@ -57,6 +57,10 @@ export default {
     
   },
   
+  // 미들웨어 테스트
+  router: {
+    // middleware: 'stat'
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

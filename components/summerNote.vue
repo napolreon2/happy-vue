@@ -1,9 +1,7 @@
-<template>
-    
+<template>    
     <b-container class="editer-con">
         <div id="summernote">내용을 입력해주세요</div>
     </b-container>
-
 </template>
 <script>
 

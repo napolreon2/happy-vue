@@ -17,12 +17,12 @@ export const actions = {
     async getJokes({commit}){
         let config = {
             headers:{ 'Accept' : 'application/json' }
-          }
+        }
 
         return new Promise((resolve, reject) => {
             axios.get('https://icanhazdadjoke.com/search', config).then((res) => {
-                  commit('add', res.data.results);
-              })
+                commit('add', res.data.results);
+            })
         })
     }
     

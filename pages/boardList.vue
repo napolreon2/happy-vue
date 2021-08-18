@@ -30,11 +30,12 @@
             </b-col>
         </b-row>
         <br>
-        <knowListBoard/>
-    </b-container>
+        <knowListBoard :test="testText"/>
+        <br>
+        <knowDetail/>
+    </b-container>    
 </template>
 <script>
-import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';
 
 export default {
     layout: 'defaultLayout',
@@ -47,6 +48,7 @@ export default {
                {value: 1, text: '제목'},
                {value: 2, text: '작성자'},
             ],
+            testText: '테스트', // prop 테스트
 
             // 검색어
             searchText: '',
@@ -74,9 +76,21 @@ export default {
 
             let searchCon = this.$data.searchCon,       // 조회조건
                 searchText = this.$data.searchText;     // 조회텍스트
-            debugger;
         }
-    }
+    },
+    async asyncData({ params, query, store }){
+        // 컴포넌트를 로드하기 전에 호출된다.
+
+        // 페이지 컴포넌트에서만 사용가능하다.
+        // 이전 페이지에서 asyncData안의 내용을 모두 끝낸 후에야 페이지 이동이 시작됨
+
+        // 컨텍스트 객체를 첫번째 인수로 받으며, 
+        // 이를 사용해 일부 데이터를 가져와 컴포넌트 데이터를 반환할 수 있다.
+
+        // component들이 create 되기 전 단계이기 때문에 this를 사용할 수 없다.
+
+        // return값은 컴포넌트의 data와 병합된다.
+    },
 }
 </script>
 <style>

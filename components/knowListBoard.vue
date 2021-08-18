@@ -1,13 +1,19 @@
 <template>
+    <div>
+    {{ test }}
     <ag-grid-vue style="height: 500px;"
         class="ag-theme-alpine"
         :columnDefs="columnDefs"
-        :rowData="rowData"
-        rowSelection="single"       
+        :rowData="boardChanged"
+        rowSelection="single"
+        @cellClicked="onCellClicked"
         @grid-ready="onGridReady"
+       
         pagination=true
         paginationPageSize=15>
     </ag-grid-vue>
+    </div>
+    
 </template>
 <script>
 import { AgGridVue } from "ag-grid-vue";
@@ -15,10 +21,10 @@ import moment from 'moment'; // 시간관련 메소드 많이 가지고 있는�
 import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';
 import axios from 'axios';
 
-// dateColumn에 filter를 걸수 있는데.. dateTime이 경우 시간이 끼어들어 있어서 시간까지는 비교를 못함..
+// ag grid filter 기능 함수
+// dateColumn에 filter를 걸수 있는데.. dateTime의 경우 시간이 끼어들어 있어서 시간까지는 비교를 못함..
 const filterParams = {
   comparator: function (filterLocalDateAtMidnight, cellValue) {
-      debugger;
     var dateAsString = cellValue;
     if (dateAsString == null) return -1;
     // var dateParts = dateAsString.split('/');
@@ -48,6 +54,9 @@ export default {
             rowData: null
         }
     },
+    props:{
+        test: ''
+    },
     components: {
         AgGridVue
     },
@@ -56,11 +65,34 @@ export default {
             this.gridApi = params.api;              // 페이지에 이 속성을 생성...
             this.columnApi = params.columnApi;
         },
+        onCellClicked(data){
+            let store = this.$store;
+
+            if(data.colDef.field == 'knowTitleNm'){
+                const userId = data.data.fstRegrId;
+                store.dispatch('boardUser/searchBoardUser', {userId});            
+            }
+        },
         ...mapActions('knowListBoardList', ['searchBoardList']),
-        ...mapState('knowListBoardList', ['boardList'])
+        ...mapActions('boardUser', ['searchBoardUser'])
     },
-    beforeMount() {
-        // 이 속성을 일일이 다 넣어줘야 한다고..?;
+    computed:{
+        ...mapState('knowListBoardList', ['boardList']), // vuex helper
+        boardChanged(){
+            return this.boardList; // knowListBoardList 스토어의 state
+        }
+    },
+    fetch() {
+        // fetch : 모든 컴포넌트에서 사용가능하다
+
+        // this를 사용가능(component instance created 후에 들어오기때문!)
+
+        //  로컬데이터 조작 용이함
+        // created 와 beforeMount 사이에 작동
+
+        // fetch()안에 parameter를 둘 경우 page단에서 작동하는 hook이 됨
+
+        // 1. 컬럼정의
         this.columnDefs = [
             { 
                 headerName: 'NO',
@@ -81,7 +113,10 @@ export default {
                 field: 'knowTitleNm', 
                 sortable: true, 
                 filter: true,
-                flex: 5
+                flex: 5,
+                cellStyle: (param) =>{
+                    return { cursor: 'pointer' }
+                },
             },
             { 
                 headerName: '요청자',
@@ -99,21 +134,21 @@ export default {
                 filter: 'agDateColumnFilter',
                 filterParams: filterParams, 
                 cellRenderer: (data) => {
-                    return moment(data.createdAt).format('YYYY/MM/DD/ HH:mm:ss')
+                    return moment(data.createdAt).format('YYYY/MM/DD HH:mm:ss')
                 }
             }
-        ],
+        ];
+       
+        const store = this.$store;    
         
-        this.$store.dispatch('knowListBoardList/searchBoardList', {})
-        .then(function(a,b,c){
-            debugger;
-        });
+        // 2. 선택게시글에 대한 유저정보 초기화
+        // reload 시 store에 담겨있는 데이터 그대로 나와서 select가 안되있음에도 데이터 표시됨
+        store.commit('boardUser/searchBoardUser', [{}]);
 
-        // const getData = this.$store.state.knowListBoardList.boardList;
+        // 3. 그리드 스토어 액션 호출
+        store.dispatch('knowListBoardList/searchBoardList', {});
 
-        // debugger;
-        // debugger;
-        // 처음에는 무조건 전체 데이터를 다 가져온다
+        // ag grid api에서 제공한 사용방법
         // fetch('http://localhost:8080/api/v1/happy/knowList')
         // .then(result => result.json())
         // .then(rowData => this.rowData = rowData);
