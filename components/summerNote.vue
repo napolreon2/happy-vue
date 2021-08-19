@@ -6,7 +6,13 @@
 <script>
 
 export default{
+    props:['store', 'varNm'],
     mounted(){
+        const store = this.$store,
+              storeTarget = this.store,
+              varNm = this.varNm;
+
+
         $('#summernote').summernote({
             lang: 'ko-KR',
             placeholder: 'Hello stand alone ui',
@@ -21,9 +27,20 @@ export default{
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+            ],
+            callbacks:{
+                onChange: (contents, editable) => {
+                    let obj = {
+                        idx: varNm,
+                        val : contents
+                    }
+                    // debugger;
+                    store.commit(storeTarget, obj);
+                }
+            }
         });
 
+        // debugger;
         // @param {String} color
         // $('#summernote').summernote('backColor', 'red');
 

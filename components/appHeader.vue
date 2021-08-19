@@ -15,7 +15,8 @@
         <b-col class="needBorder"><nuxt-link to="/jokes">아재개그</nuxt-link></b-col>
         <b-col class="needBorder"><nuxt-link to="/joinUser">회원추가</nuxt-link></b-col>
         <b-col class="needBorder"><nuxt-link to="/boardList">게시판 리스트</nuxt-link></b-col>
-        <b-col class="needBorder"><nuxt-link to="/customComponentTest">테스트</nuxt-link></b-col>
+        <b-col class="needBorder"><nuxt-link to="/customComponentTest">지식입력</nuxt-link></b-col>
+        <b-col class="needBorder"><nuxt-link to="/testList">지식목록</nuxt-link></b-col>
       </b-row>
     </b-container>   
 

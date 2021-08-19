@@ -15,24 +15,35 @@ export const state = function(){
 
 // 2. actions
 export const actions = {
-    // async searchBoardUser({commit}, {userId}){
-    //     return new Promise((resolve, reject) => {
-    //         const url = 'http://localhost:8080/api/v1/happy/user' + '/' + userId;
-    //         axios.get(url).then((res) => { commit('searchBoardUser', [res.data]); })
-    //     })
-
-    //     }
+    
 }
 
 // 3. mutations
 export const mutations ={
+    
+    // input 태그를 override한 custom-input에서 change 이벤트 발생시 실시간으로 데이터를 store에 쌓기
     setFieldState(state, data){
         let obj = Object.getOwnPropertyDescriptor(state.know, data.idx);
-        
+
         if(obj) obj.set(data.val);
 
     },
+
+    // textarea로 테스트
     setTextAreaState(state, data){
         state.know.knowCntnt = data;
+    },
+
+    // 초기화
+    initStore(state){
+        state.know = {
+            knowTitleNm:'',
+            bltnStartDt:'',
+            bltnEndDt:'',
+            mainExpseYn:'',
+            moblUseYn:'',
+            knowStsCd:'',
+            knowCntnt: ''
+        };
     }
 }

@@ -68,7 +68,7 @@ export default {
 
   publicRuntimeConfig:{
     axios:{
-      baseURL: 'http://localhost:8080'
+      baseURL: 'http://localhost:8094',
     }
   }
 }

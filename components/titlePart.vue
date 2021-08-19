@@ -2,7 +2,7 @@
     <b-container>
         <b-row>
             <label>제목</label>
-            <custom-input :store="storeTarget" varNm="knowTitleNm" class="customInput" type="text"/>
+            <custom-input :store="storeTarget" varNm="knowTitleNm" :customChangeEvent="customChangeEvent" class="customInput" type="text"/>
         </b-row>
         <br>
         <br>
@@ -19,13 +19,14 @@
                 <br>
                 <label>지식상태코드</label><custom-input :store="storeTarget" varNm="knowStsCd" class="customInput" type="text"/>
             </b-col>
-            <span>제목실시간표시 : {{ know }}</span>
+            <span>입력내용 스토어 저장 실시간으로 보기</span>
+            <div>{{ know }}</div>
         </b-row>
         <br>
         <b-container>
-            <textarea cols="30" rows="10" v-model="mainContent"></textarea>
-            {{ setTextAreaValueToStore }}
-        </b-container>
+            <!-- <textarea cols="30" rows="10" v-model="mainContent" @change="onChange4Area"></textarea> -->
+            <summer-note :store="storeTarget" varNm="knowCntnt" />
+        </b-container>        
     </b-container>
 </template>
 
@@ -35,22 +36,29 @@
     export default {
         data(){
             return {
-                mainContent: '',
-                storeTarget: 'componentTest/setFieldState'
+                storeTarget: 'componentTest/setFieldState',
+                customChangeEvent: function(){
+                    alert('체인지 이벤트에 내가 넣고 싶은 내용을 넣어보자');
+                }
             }
         },
+        // fetch(){            
+        //     this.$store.commit('componentTest/initStore');
+        // },
         methods:{
            
         },
         computed:{
-            ...mapState('componentTest', ['know']),
-            setTextAreaValueToStore(){
-                let obj = {
-                    idx: 'knowCntnt',
-                    val: this.mainContent
-                }
-                this.$store.commit(this.storeTarget, obj);
-            }
+            ...mapState('componentTest', ['know'])
+        },
+        methods:{
+            // onChange4Area(){
+            //     let obj = {
+            //         idx: 'knowCntnt',
+            //         val: this.mainContent
+            //     }
+            //     this.$store.commit(this.storeTarget, obj);
+            // }
         }
     }
 </script>

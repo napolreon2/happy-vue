@@ -13,7 +13,7 @@
 <script>
     export default {
         props:['type', 'value', 'width', 'customProp',
-         'store', 'varNm'
+         'store', 'varNm', 'customChangeEvent'
          ],
         
         mounted(){
@@ -21,19 +21,23 @@
         },
         methods:{
             onChange4Field(event){
-                let val = (this.type != 'checkbox') ? event.target.value : 
-                                event.target.checked ? 'Y' : 'N'; 
+                let val = event.target.value;
 
+                if(this.type == 'checkbox') val = event.target.checked;
+                if(this.type == 'date')     val = event.target.value.replaceAll('-', '')
+                
                 let obj = {
                     idx: this.varNm,
                     val: val
                 };
 
                 this.$store.commit(this.store, obj);
-                /*
-                    0 : state의 항목명(string)
-                    1 : 스토어에 저장할 value값
+
+                /*  
+                    추가적으로 내가 넣고 싶은 change이벤트 처리 내용이 있을때
+                    이렇게 넘겨주게 하면 어떨까?
                 */
+                if(this.customChangeEvent) this.customChangeEvent();
             }
         }
     }
