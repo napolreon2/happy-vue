@@ -5,8 +5,7 @@
     
     <h1>회원 검색기능</h1>
     
-    <custom-input width="200px" customProp="커스텀" :value="test" @getvalue:value="val => test = val"/>
-
+    
     <p class="userBoard" v-if="users.length > 0"><!-- 검색결과 출력 부분 -->
       <ul v-for="u in users" :key="u.userId"><!-- store의 state 값을 그대로 가져다 사용! -->
         <li>[ {{u.userId}} ]: {{u.userEmail}} ( {{u.userPassword}} ) : {{ u.userRoles }}</li>
@@ -21,6 +20,11 @@
     <button v-on:click="findUser">찾기</button>
     {{ msg }}
     <button v-on:click="messageFunc('히히')">믹스인 메세지</button>
+
+
+    <input type="file" multiple @change="onChange4File">
+    <button @click="testFunc">axios 테스트!</button>
+  
   </b-container>
  
 </template>
@@ -28,7 +32,6 @@
 import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';
 import axios from 'axios';
 import textMixin from '~/static/plugins/mixin/textMixin';
-import customInput from '~/components/customInput.vue';
 
 export default{  
   layout: 'defaultLayout',
@@ -46,7 +49,9 @@ export default{
   data(){
     return {
       userNo: '',
-      test: ''
+      test: '',
+
+      testFile: null
     };
   },
   computed: {
@@ -55,6 +60,36 @@ export default{
   methods:{
     ...mapActions('user', ['getUsersById']),
     
+    onChange4File(event){
+      const file = event.target.files[0];
+      this.testFile = file;
+    },
+
+
+    testFunc(){
+      var formData = new FormData();
+
+      var jsonData = {
+	requestorId: "0123456789",
+	requestorTeamCd: "124",
+	taskName: "테스트프로그램",
+	taskTypeCd: "01",
+	taskMethodCd: "2",
+	taskMemo: "메모입니다.",
+	consultationTypeCd: "012345678"
+}
+
+      formData.append("file", this.testFile);
+      formData.append("param", new Blob([JSON.stringify(jsonData)], {type: 'application/json'}));
+      axios.post('http://localhost:8095/api/v1/ctc/batch/tm-task', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      }).then((res)=>{
+        debugger;
+      })
+    },
+
     findUser(){
       let inputNo = this.userNo;
 

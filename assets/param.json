@@ -1,0 +1,9 @@
+{
+	"requestorId": "0123456789",
+	"requestorTeamCd": "124",
+	"taskName": "테스트프로그램",
+	"taskTypeCd": "01",
+	"taskMethodCd": "2",
+	"taskMemo": "메모입니다.",
+	"consultationTypeCd": "012345678"
+}

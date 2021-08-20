@@ -3,6 +3,7 @@
         <input  :type="type" 
                 :value="value" 
                 :width="width"
+                :checked="checked"
                 @input="$emit('getvalue:value', $event.target.value)"
                 @change="onChange4Field">
 
@@ -12,7 +13,7 @@
 
 <script>
     export default {
-        props:['type', 'value', 'width', 'customProp',
+        props:['type', 'value', 'width', 'checked', 'customProp',
          'store', 'varNm', 'customChangeEvent'
          ],
         
@@ -24,7 +25,6 @@
                 let val = event.target.value;
 
                 if(this.type == 'checkbox') val = event.target.checked;
-                if(this.type == 'date')     val = event.target.value.replaceAll('-', '')
                 
                 let obj = {
                     idx: this.varNm,

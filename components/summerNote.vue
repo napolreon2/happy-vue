@@ -1,12 +1,12 @@
 <template>    
     <b-container class="editer-con">
-        <div id="summernote">내용을 입력해주세요</div>
+        <div id="summernote" v-html="this.value"></div>
     </b-container>
 </template>
 <script>
 
 export default{
-    props:['store', 'varNm'],
+    props:['store', 'varNm', 'value'],
     mounted(){
         const store = this.$store,
               storeTarget = this.store,

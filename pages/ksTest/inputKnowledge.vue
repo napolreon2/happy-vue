@@ -1,6 +1,6 @@
 <template>
     <b-container>
-        <title-part/>
+        <ksTestInput-board-part/>
         <b-container>
             <button @click="onBtnSave">저장</button>
             <button @click="onBtnCancel">취소</button>
@@ -26,8 +26,8 @@
                     knowTitleNm: this.know.knowTitleNm,     // 제목 
                     bltnStartDt: this.know.bltnStartDt,
                     bltnEndDt: this.know.bltnEndDt,
-                    mainExpseYn: this.know.mainExpseYn ? 'Y' : 'N',
-                    moblUseYn: this.know.moblUseYn ? 'Y' : 'N',
+                    mainExpseYn: this.know.mainExpseYn,
+                    moblUseYn: this.know.moblUseYn,
                     knowStsCd: this.know.knowStsCd,
                     knowCntnt: this.know.knowCntnt,
                     usrId: 'SYSTEM' //일단 임의로.. 
@@ -37,17 +37,17 @@
                      .then((res) => {
                         alert('글이 추가되었습니다');
 
-                        this.$store.commit('componentTest/initStore'); // 저장후엔 store 비워주기
+                        this.$store.commit('ksTest/inputKnowStore/initStore'); // 저장후엔 store 비워주기
                         
-                        this.$router.push('/testList');
+                        this.$router.push('ksTest/testList');
                      })
             },
             onBtnCancel(){
-                this.$store.commit('componentTest/initStore');
+                this.$store.commit('ksTest/inputKnowStore/initStore');
             }
         },
         computed:{
-            ...mapState('componentTest', ['know'])
+            ...mapState('ksTest/inputKnowStore', ['know'])
         }
     }
 </script>
