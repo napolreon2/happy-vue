@@ -23,7 +23,7 @@
 
 
     <input type="file" multiple @change="onChange4File">
-    <button @click="testFunc">axios 테스트!</button>
+    <button @click="testFunc">Json + file 요청 테스트!</button>
   
   </b-container>
  
@@ -65,19 +65,19 @@ export default{
       this.testFile = file;
     },
 
-
+    // Json과 file 함께 전송 
     testFunc(){
       var formData = new FormData();
 
       var jsonData = {
-	requestorId: "0123456789",
-	requestorTeamCd: "124",
-	taskName: "테스트프로그램",
-	taskTypeCd: "01",
-	taskMethodCd: "2",
-	taskMemo: "메모입니다.",
-	consultationTypeCd: "012345678"
-}
+	                    requestorId: "0123456789",
+	                    requestorTeamCd: "124",
+	                    taskName: "테스트프로그램",
+	                    taskTypeCd: "01",
+	                    taskMethodCd: "2",
+	                    taskMemo: "메모입니다.",
+	                    consultationTypeCd: "012345678"
+                    }
 
       formData.append("file", this.testFile);
       formData.append("param", new Blob([JSON.stringify(jsonData)], {type: 'application/json'}));

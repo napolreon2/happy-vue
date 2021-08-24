@@ -1,7 +1,7 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
+  
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'happy-vue',
@@ -64,6 +64,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  loading:{
+    color: 'blue',
+    height: '5px'
   },
 
   publicRuntimeConfig:{

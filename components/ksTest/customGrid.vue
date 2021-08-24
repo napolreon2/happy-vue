@@ -35,7 +35,8 @@
                         field: 'knowId',
                         sortable: true,
                         filter: true,
-                        flex:1
+                        flex:1,
+                        resizable: true
                     },
                     { 
                         headerName: '구분',

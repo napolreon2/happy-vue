@@ -17,7 +17,10 @@
             return {
 
             }
-        }        
+        },
+        methods:{
+           
+        }    
     }
 </script>
 

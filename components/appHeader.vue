@@ -13,10 +13,11 @@
         <!-- nuxt-link는 a태그의 일종 -->
         <b-col class="needBorder"><nuxt-link to="/">Home</nuxt-link></b-col>
         <b-col class="needBorder"><nuxt-link to="/jokes">아재개그</nuxt-link></b-col>
-        <b-col class="needBorder"><nuxt-link to="/joinUser">회원추가</nuxt-link></b-col>
-        <b-col class="needBorder"><nuxt-link to="/boardList">게시판 리스트</nuxt-link></b-col>
+        <!-- <b-col class="needBorder"><nuxt-link to="/joinUser">회원추가</nuxt-link></b-col>
+        <b-col class="needBorder"><nuxt-link to="/boardList">게시판 리스트</nuxt-link></b-col> -->
         <b-col class="needBorder"><nuxt-link to="/ksTest/inputKnowledge">지식입력</nuxt-link></b-col>
         <b-col class="needBorder"><nuxt-link to="/ksTest/knowledgeList">지식목록</nuxt-link></b-col>
+        <b-col class="needBorder"><nuxt-link to="/ksTest/agGridPractice">그리드연습</nuxt-link></b-col>
       </b-row>
     </b-container>   
 

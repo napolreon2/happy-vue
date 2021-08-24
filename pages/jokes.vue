@@ -12,7 +12,7 @@ import {mapState} from 'vuex';
 
 export default{
   layout: 'defaultLayout',
-
+  loadingIndicator: 'circle',
   // data(){
   //   return {
   //     jokes: []

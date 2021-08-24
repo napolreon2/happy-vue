@@ -3,9 +3,9 @@
         <input  :type="type" 
                 :value="value" 
                 :width="width"
-                :checked="checked"
-                @input="$emit('getvalue:value', $event.target.value)"
+                :checked="checked"                
                 @change="onChange4Field">
+                <!--@input="$emit('getvalue:value', $event.target.value)"-->
 
                 <!-- 이벤트 리스너는 항상 소문자로 변환되기 때문에 헷갈리지 않게 소문자만 쓰기! -->
     </div>
